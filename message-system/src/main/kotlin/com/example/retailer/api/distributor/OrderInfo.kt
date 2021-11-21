@@ -1,8 +1,12 @@
 package com.example.retailer.api.distributor
 
+import javax.persistence.Entity
+import javax.persistence.Id
+
 /**
  * Уведомление об изменении заказа
  */
+@Entity
 data class OrderInfo(
 
     /**
@@ -10,6 +14,7 @@ data class OrderInfo(
      *
      * @see com.example.retailer.api.distributor.Item#id
      */
+    @Id
     val orderId: String,
 
     /**

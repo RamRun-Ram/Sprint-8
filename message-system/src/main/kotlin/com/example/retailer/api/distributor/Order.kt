@@ -1,12 +1,17 @@
 package com.example.retailer.api.distributor
 
+import javax.persistence.*
+
 /**
  * Описание заказа
  */
+@Entity
 data class Order(
     /**
      * Уникальный идентификатор заказа на стороне ретейлера
      */
+    @Id
+    @GeneratedValue
     val id: String?,
 
     /**
@@ -22,5 +27,6 @@ data class Order(
     /**
      * Список заказанных товаров
      */
+    @OneToMany(cascade = [CascadeType.ALL])
     val items: List<Item>
 )

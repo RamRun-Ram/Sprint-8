@@ -5,31 +5,35 @@ import com.example.retailer.api.distributor.OrderInfo
 import com.example.retailer.api.distributor.OrderStatus
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.stereotype.Component
 
+@Component("orderStorage")
 class OrderStorageImpl : OrderStorage {
 
     @Autowired
-    lateinit var orderRepository: OrderRepository
+    lateinit var orderRepository: OrderRepo
 
     @Autowired
-    lateinit var orderInfoRepository: OrderInfoRepository
+    lateinit var orderInfoRepository: OrderInfoRepo
 
     override fun createOrder(draftOrder: Order): PlaceOrderData {
         val result = orderRepository.save(draftOrder)
-
-        val orderInfo = OrderInfo(
-            result.id!!,
-            OrderStatus.SENT, "orderInfo"
+        val orderInfo = orderInfoRepository.save(
+            OrderInfo(
+                result.id!!,
+                OrderStatus.SENT,
+                "orderInfo"
+            )
         )
         return PlaceOrderData(result, orderInfo)
     }
 
     override fun updateOrder(order: OrderInfo): Boolean {
-        return if (orderRepository.existsById(order.orderId)) {
+        if (orderRepository.existsById(order.orderId)) {
             orderInfoRepository.save(order)
-            true
+            return true
         } else
-            false
+            return false
     }
 
     override fun getOrderInfo(id: String): OrderInfo? {

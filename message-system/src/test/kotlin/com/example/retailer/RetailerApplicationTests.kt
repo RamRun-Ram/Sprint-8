@@ -14,6 +14,7 @@ import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class RetailerApplicationTests {
 
@@ -86,6 +87,5 @@ class RetailerApplicationTests {
         assertThat(resp.statusCode, equalTo(HttpStatus.OK))
         return resp.body!!
     }
-
-
 }
+

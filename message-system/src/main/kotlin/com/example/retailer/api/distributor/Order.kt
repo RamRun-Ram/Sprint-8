@@ -1,5 +1,6 @@
 package com.example.retailer.api.distributor
 
+import org.hibernate.annotations.GenericGenerator
 import javax.persistence.*
 
 /**
@@ -11,7 +12,8 @@ data class Order(
      * Уникальный идентификатор заказа на стороне ретейлера
      */
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     val id: String?,
 
     /**

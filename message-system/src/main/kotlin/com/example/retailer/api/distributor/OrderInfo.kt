@@ -29,4 +29,4 @@ data class OrderInfo(
      */
     val signature: String,
 
-)
+    )
